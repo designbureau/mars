@@ -1,0 +1,5 @@
+AltSurface "m46 shaded JPG" "Sol/Mars"
+{
+	Texture "m46shaded JPG.ctx"
+        NormalMap "m46Normal PNG.ctx"
+}

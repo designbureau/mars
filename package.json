@@ -1,0 +1,17 @@
+{
+  "name": "mars2",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.7.2"
+  },
+  "dependencies": {
+    "lil-gui": "^0.15.0",
+    "three": "^0.135.0",
+    "vite-plugin-string": "^1.1.1"
+  }
+}

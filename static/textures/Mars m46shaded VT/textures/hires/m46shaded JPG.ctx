@@ -1,0 +1,7 @@
+VirtualTexture
+{
+        ImageDirectory "m46shaded JPG"
+        BaseSplit 0
+        TileSize 1024
+        TileType "jpg"
+} 
