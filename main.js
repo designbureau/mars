@@ -97,9 +97,9 @@ gui
   .max(2)
   .step(0.001)
   .name("Directional Light");
-gui.add(directionalLight.position, "x").min(-5).max(5).step(0.001);
-gui.add(directionalLight.position, "y").min(-5).max(5).step(0.001);
-gui.add(directionalLight.position, "z").min(-5).max(5).step(0.001);
+gui.add(directionalLight.position, "x").min(-5).max(10).step(0.001);
+gui.add(directionalLight.position, "y").min(-5).max(10).step(0.001);
+gui.add(directionalLight.position, "z").min(-5).max(10).step(0.001);
 scene.add(directionalLight);
 
 const pointlight = new THREE.PointLight(0x000000, 0, 100);
@@ -169,6 +169,7 @@ TDSloader.load("static/moons/models/phobos.3DS", function (object) {
   });
   phobos.material = phobosMaterial;
   phobos.scale.set(phobosRadius, phobosRadius, phobosRadius);
+  phobos.castShadow = true;
 
   marsGroup.add(phobos);
 });
@@ -194,14 +195,15 @@ TDSloader.load("static/moons/models/deimos.3ds", function (object) {
   });
   deimos.material = deimosMaterial;
   deimos.scale.set(deimosRadius, deimosRadius, deimosRadius);
-
+  deimos.castShadow = true;
   marsGroup.add(deimos);
 });
 
 const marsGeometry = new THREE.SphereBufferGeometry(marsRadius, 64, 64);
 const mars = new THREE.Mesh(marsGeometry, marsMaterial);
 // const mars = new THREE.Mesh(marsGeometry, surfaceMaterialNew);
-
+mars.receiveShadow = true;
+mars.castShadow = true;
 marsGroup.add(mars);
 
 const marsSurfaceAtmosphere = new THREE.Mesh(marsGeometry, surfaceMaterial);
@@ -219,7 +221,7 @@ shadowMaterial.blending = THREE.MultiplyBlending;
 
 const shadowMesh = new THREE.Mesh(marsGeometry, shadowMaterial);
 shadowMesh.scale.set(1.003, 1.003, 1.003);
-shadowMesh.receiveShadow = true;
+// shadowMesh.receiveShadow = true;
 marsGroup.add(shadowMesh);
 
 scene.add(marsGroup);
@@ -251,7 +253,7 @@ window.addEventListener("resize", () => {
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(
-  20,
+  50,
   sizes.width / sizes.height,
   0.1,
   10000
@@ -275,8 +277,9 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap = true;
 
-renderer.autoClear = false;
+// renderer.autoClear = false;
 
 const postprocessing = {};
 
